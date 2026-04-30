@@ -1,0 +1,69 @@
+"use client";
+
+const stats = [
+  { num: "1,200+", label: "コンテンツ数" },
+  { num: "340+", label: "会員数" },
+  { num: "毎日", label: "新着コンテンツ" },
+];
+
+export function PortalHero() {
+  return (
+    <section className="relative min-h-screen pt-[68px] overflow-hidden bg-gradient-to-br from-portal-cream via-[#FDF0E8] to-[#FBE8DA]">
+      <div className="pointer-events-none absolute -top-24 -right-48 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(232,180,184,0.18)_0%,transparent_70%)]" />
+      <div className="pointer-events-none absolute -bottom-20 -left-24 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(143,174,139,0.15)_0%,transparent_70%)]" />
+
+      <div className="relative z-10 grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 items-center min-h-[calc(100vh-68px)]">
+        <div className="flex items-center justify-center px-10 py-16 [@media(min-width:900px)]:pl-20 [@media(min-width:900px)]:pr-10 [@media(min-width:900px)]:py-16 order-1">
+          <div className="relative w-[340px] h-[340px] [@media(min-width:900px)]:w-[420px] [@media(min-width:900px)]:h-[420px] animate-portal-float">
+            <div className="absolute -inset-5 rounded-full bg-[radial-gradient(circle,rgba(232,180,184,0.4)_0%,transparent_70%)] animate-portal-pulse" />
+            <div className="absolute inset-0 bg-gradient-to-br from-portal-rose to-portal-amber opacity-[0.85] animate-blob-morph" />
+            <div className="absolute inset-[15%] bg-portal-cream/55 backdrop-blur-[2px] animate-blob-morph" style={{ animationDirection: "reverse", animationDuration: "10s" }} />
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+              <span className="font-serif text-[4.5rem] font-light text-white/95 leading-none tracking-[-0.02em] [text-shadow:0_2px_20px_rgba(180,100,80,0.25)]">生</span>
+              <span className="font-round text-[0.9rem] text-white/80 tracking-[0.2em] mt-1">IKIRU</span>
+            </div>
+            <div className="absolute top-[8%] left-[15%] w-7 h-7 rounded-[50%_0_50%_0] bg-portal-lavender/60 animate-portal-float-slow [animation-delay:0s]" />
+            <div className="absolute top-[20%] right-[8%] w-[18px] h-[18px] rounded-[50%_0_50%_0] bg-portal-sage/50 animate-portal-float-slow [animation-delay:1.5s]" />
+            <div className="absolute bottom-[22%] left-[6%] w-[22px] h-[22px] rounded-[0_50%_0_50%] bg-portal-amber/50 animate-portal-float-slow [animation-delay:2.8s]" />
+            <div className="absolute bottom-[10%] right-[18%] w-[14px] h-[14px] rounded-[50%_0_50%_0] bg-portal-rose/70 animate-portal-float-slow [animation-delay:0.8s]" />
+          </div>
+        </div>
+
+        <div className="order-2 px-10 py-12 [@media(min-width:900px)]:pr-20 [@media(min-width:900px)]:pl-10 [@media(min-width:900px)]:py-16 animate-portal-fade-in">
+          <div className="flex items-center gap-[10px] mb-5">
+            <span className="inline-block w-8 h-[1.5px] bg-gradient-to-r from-portal-rose to-portal-amber" />
+            <span className="font-round text-[0.8rem] font-bold tracking-[0.3em] text-portal-amber-deep uppercase">ASI × Spiritual</span>
+          </div>
+          <h1 className="font-serif font-bold text-portal-text-dark leading-[1.2] tracking-[-0.01em] mb-3 text-[clamp(2.8rem,5vw,4.2rem)]">
+            AI{" "}
+            <span className="bg-gradient-to-br from-portal-rose to-portal-amber bg-clip-text text-transparent">Nation</span>
+          </h1>
+          <div className="mb-7 max-w-[380px]">
+            <p className="font-round text-[1.05rem] font-bold text-portal-text-dark leading-[1.6]">生きるを再定義する</p>
+            <p className="font-round text-[0.95rem] text-portal-text-soft leading-[1.7] mt-1">ASIとスピリチュアルが交わる、新しい意識の場へ</p>
+          </div>
+          <p className="font-round text-[1rem] text-portal-text-mid leading-[1.9] max-w-[400px] mb-10">
+            AI Nationは、人工超知性（ASI）と精神的覚醒の融合を探求するコミュニティです。魂の声に従い、テクノロジーと調和した新しい生き方を共に創造します。
+          </p>
+          <div className="flex flex-wrap items-center gap-4 mb-12">
+            <a href="#journey" className="inline-flex items-center gap-2 font-round text-[1rem] font-bold tracking-[0.05em] text-white px-9 py-4 rounded-full bg-gradient-to-br from-portal-rose to-portal-amber shadow-[0_8px_32px_rgba(212,132,138,0.40)] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_14px_44px_rgba(212,132,138,0.52)] group">
+              旅を始める
+              <span className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </a>
+            <a href="#content" className="inline-flex items-center font-round text-[0.95rem] font-medium text-portal-text-mid px-7 py-[15px] rounded-full border-[1.5px] border-portal-rose bg-transparent transition-all duration-200 hover:bg-portal-rose-light hover:border-portal-rose-deep hover:text-portal-rose-deep">
+              コンテンツを見る
+            </a>
+          </div>
+          <div className="flex gap-9 pt-9 border-t border-portal-amber/20">
+            {stats.map((s) => (
+              <div key={s.label} className="text-left">
+                <p className="font-serif text-[1.9rem] font-bold text-portal-amber-deep leading-none mb-1">{s.num}</p>
+                <p className="font-round text-[0.78rem] text-portal-text-soft tracking-[0.06em]">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

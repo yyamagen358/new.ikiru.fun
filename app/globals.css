@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* AI Nation Portal — Warm Spiritual */
+    --portal-cream: #FFF8F0;
+    --portal-cream-deep: #FFF0E0;
+    --portal-rose: #E8B4B8;
+    --portal-rose-deep: #D4848A;
+    --portal-rose-light: #F5D8DA;
+    --portal-amber: #D4A574;
+    --portal-amber-light: #EDD5B3;
+    --portal-amber-deep: #B8834E;
+    --portal-sage: #8FAE8B;
+    --portal-sage-light: #C4D9C2;
+    --portal-sage-deep: #6A8F66;
+    --portal-lavender: #B8A9C9;
+    --portal-lavender-light: #DDD6EA;
+    --portal-lavender-deep: #8E7BA8;
+    --portal-text-dark: #3D2B1F;
+    --portal-text-mid: #6B4F3A;
+    --portal-text-soft: #9B7B65;
+    --portal-text-muted: #C4A882;
+  }
+
+  @keyframes blob-morph {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50% { border-radius: 50% 60% 30% 60% / 40% 50% 60% 50%; }
+    75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 40%; }
+  }
+
+  @keyframes portal-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-18px) rotate(2deg); }
+    66% { transform: translateY(-8px) rotate(-1deg); }
+  }
+
+  @keyframes portal-float-slow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes portal-pulse-soft {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
+  }
+
+  @keyframes portal-fade-in-up {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .portal-animate-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .portal-animate-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-noto-sans-jp);
+  --font-serif: var(--font-noto-serif-jp);
+  --font-round: var(--font-zen-maru-gothic);
+
+  /* Portal Colors */
+  --color-portal-cream: var(--portal-cream);
+  --color-portal-cream-deep: var(--portal-cream-deep);
+  --color-portal-rose: var(--portal-rose);
+  --color-portal-rose-deep: var(--portal-rose-deep);
+  --color-portal-rose-light: var(--portal-rose-light);
+  --color-portal-amber: var(--portal-amber);
+  --color-portal-amber-light: var(--portal-amber-light);
+  --color-portal-amber-deep: var(--portal-amber-deep);
+  --color-portal-sage: var(--portal-sage);
+  --color-portal-sage-light: var(--portal-sage-light);
+  --color-portal-sage-deep: var(--portal-sage-deep);
+  --color-portal-lavender: var(--portal-lavender);
+  --color-portal-lavender-light: var(--portal-lavender-light);
+  --color-portal-lavender-deep: var(--portal-lavender-deep);
+  --color-portal-text-dark: var(--portal-text-dark);
+  --color-portal-text-mid: var(--portal-text-mid);
+  --color-portal-text-soft: var(--portal-text-soft);
+  --color-portal-text-muted: var(--portal-text-muted);
+
+  --animate-blob-morph: blob-morph 14s ease-in-out infinite;
+  --animate-portal-float: portal-float 9s ease-in-out infinite;
+  --animate-portal-float-slow: portal-float-slow 6s ease-in-out infinite;
+  --animate-portal-pulse: portal-pulse-soft 5s ease-in-out infinite;
+  --animate-portal-fade-in: portal-fade-in-up 0.9s ease both;
+}
+
+body {
+  background: var(--portal-cream);
+  color: var(--portal-text-dark);
+  font-family: var(--font-noto-sans-jp), sans-serif;
+}
