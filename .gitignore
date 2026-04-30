@@ -21,6 +21,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# omc internal state
+.omc/state/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
