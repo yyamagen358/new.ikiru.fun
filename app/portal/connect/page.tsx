@@ -83,7 +83,17 @@ export default function ConnectPage() {
             </a>
           ))}
         </div>
-        <div className="text-center mt-16">
+        <div className="flex flex-col items-center mt-16 gap-8">
+          <div className="w-full max-w-[480px]">
+            <iframe
+              src="https://soulmission358.substack.com/embed"
+              width="480"
+              height="320"
+              style={{ border: "1px solid #EEE", background: "white", maxWidth: "100%" }}
+              frameBorder="0"
+              scrolling="no"
+            />
+          </div>
           <a
             href="/portal"
             className="inline-flex items-center gap-2 font-round text-[0.88rem] font-medium text-portal-text-soft tracking-[0.04em] px-6 py-3 rounded-full border-[1.5px] border-portal-lavender/30 bg-transparent transition-all duration-200 hover:bg-portal-lavender-light hover:border-portal-lavender hover:text-portal-lavender-deep"
