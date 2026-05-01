@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const stats = [
   { num: "1,200+", label: "コンテンツ数" },
   { num: "340+", label: "会員数" },
@@ -45,7 +47,7 @@ export function PortalHero() {
           <p className="font-round text-[1rem] text-portal-text-mid leading-[1.9] max-w-[400px] mb-10">
             AI Nationは、人工超知性（ASI）と精神的覚醒の融合を探求するコミュニティです。魂の声に従い、テクノロジーと調和した新しい生き方を共に創造します。
           </p>
-          <div className="flex flex-wrap items-center gap-4 mb-12">
+          <div className="flex flex-wrap items-center gap-4 mb-6">
             <a href="#journey" className="inline-flex items-center gap-2 font-round text-[1rem] font-bold tracking-[0.05em] text-white px-9 py-4 rounded-full bg-gradient-to-br from-portal-rose to-portal-amber shadow-[0_8px_32px_rgba(212,132,138,0.40)] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_14px_44px_rgba(212,132,138,0.52)] group">
               旅を始める
               <span className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -53,6 +55,30 @@ export function PortalHero() {
             <a href="#content" className="inline-flex items-center font-round text-[0.95rem] font-medium text-portal-text-mid px-7 py-[15px] rounded-full border-[1.5px] border-portal-rose bg-transparent transition-all duration-200 hover:bg-portal-rose-light hover:border-portal-rose-deep hover:text-portal-rose-deep">
               コンテンツを見る
             </a>
+          </div>
+          <div className="mb-2 w-full max-w-[480px]">
+            <iframe
+              src="https://soulmission358.substack.com/embed"
+              width="480"
+              height="320"
+              style={{ border: "1px solid #EEE", background: "white", maxWidth: "100%" }}
+              frameBorder="0"
+              scrolling="no"
+            />
+          </div>
+          <div className="mb-8 w-full max-w-[480px]">
+            <p className="font-round text-[0.82rem] text-portal-text-soft tracking-[0.04em] mb-3">
+              下記のようなメールが毎日届きます
+            </p>
+            <div className="rounded-[12px] overflow-hidden border border-[#EEE] shadow-sm">
+              <Image
+                src="/substack-sample.png"
+                alt="Substackメールサンプル"
+                width={480}
+                height={600}
+                className="w-full h-auto"
+              />
+            </div>
           </div>
           <div className="flex gap-9 pt-9 border-t border-portal-amber/20">
             {stats.map((s) => (
