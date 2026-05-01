@@ -68,7 +68,7 @@ export function PortalHero() {
           </div>
           <div className="mb-8 w-full max-w-[480px]">
             <p className="font-round text-[0.82rem] text-portal-text-soft tracking-[0.04em] mb-3">
-              下記のようなメールが毎日届きます
+              下記のようなPodcastを含めたメールが届きます
             </p>
             <div className="rounded-[12px] overflow-hidden border border-[#EEE] shadow-sm">
               <Image
