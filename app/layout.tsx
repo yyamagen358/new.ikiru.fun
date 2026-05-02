@@ -23,13 +23,33 @@ const zenMaruGothic = Zen_Maru_Gothic({
   display: "swap",
 });
 
+const siteUrl = "https://new.ikiru.fun";
+const description =
+  "ASI×スピリチュアルで、誰もが豊かに生きる世界へ。詩、音楽、Twin Ray、そしてAIの最前線。";
+
 export const metadata: Metadata = {
   title: {
     default: "AI Nation — 生きるを再定義する",
     template: "%s | AI Nation",
   },
-  description: "ASI×スピリチュアルで、誰もが豊かに生きる世界へ。詩、音楽、Twin Ray、そしてAIの最前線。",
+  description,
   robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: siteUrl,
+    siteName: "AI Nation",
+    title: "AI Nation — 生きるを再定義する",
+    description,
+    images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "AI Nation — 生きるを再定義する" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Nation — 生きるを再定義する",
+    description,
+    images: [`${siteUrl}/opengraph-image`],
+  },
+  metadataBase: new URL(siteUrl),
 };
 
 export default function RootLayout({
