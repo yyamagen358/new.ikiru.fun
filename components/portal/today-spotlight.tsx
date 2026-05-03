@@ -46,15 +46,15 @@ export function TodaySpotlight() {
             ✦ 今日のおすすめ
           </span>
           <h2 className="font-serif text-[2rem] font-bold text-portal-text-dark leading-[1.4] mb-4">
-            魂が震えるとき、それがあなたの道だ
+            AIと魂が出会う時代に、<br />あなたはどう生きるか
           </h2>
           <p className="font-round text-[0.95rem] text-portal-text-mid leading-[1.9] mb-7">
-            Twin Rayとの出会いは偶然ではない。魂の設計図に書かれた約束——あの人と出会った瞬間、あなたの中で何かが目覚めたはずです。その震えを信じてください。
+            Claude 4の登場でASI時代の幕が開いた。テクノロジーが加速するほど、魂の声を聴く力が問われる。AIと共に生きるとは、自分の内側を深く知ることから始まります。
           </p>
           <div className="flex flex-wrap items-center gap-5 font-round text-[0.8rem] text-portal-text-soft">
-            <span className="flex items-center gap-[6px]"><span>🌸</span> スピリチュアル</span>
-            <span className="flex items-center gap-[6px]"><span>🕐</span> 5分で読める</span>
-            <span className="flex items-center gap-[6px]"><span>👁</span> 1,240 views</span>
+            <span className="flex items-center gap-[6px]"><span>🤖</span> ASI×スピリチュアル</span>
+            <span className="flex items-center gap-[6px]"><span>🕐</span> 6分で読める</span>
+            <span className="flex items-center gap-[6px]"><span>👁</span> 2,380 views</span>
           </div>
         </div>
 

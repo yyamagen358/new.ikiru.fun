@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 const stats = [
   { num: "1,200+", label: "コンテンツ数" },
   { num: "340+", label: "会員数" },
@@ -70,14 +68,32 @@ export function PortalHero() {
             <p className="font-round text-[0.82rem] text-portal-text-soft tracking-[0.04em] mb-3">
               下記のようなPodcastを含めたメールが届きます
             </p>
-            <div className="rounded-[12px] overflow-hidden border border-[#EEE] shadow-sm">
-              <Image
-                src="/substack-sample.png"
-                alt="Substackメールサンプル"
-                width={480}
-                height={600}
-                className="w-full h-auto"
-              />
+            <div className="rounded-[12px] overflow-hidden border border-[#EEE] shadow-sm bg-white">
+              <div className="bg-[#F9F4EE] px-5 py-4 border-b border-[#EEE] flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-portal-rose to-portal-amber flex items-center justify-center text-white text-[0.7rem] font-bold shrink-0">S</div>
+                <div>
+                  <p className="font-round text-[0.78rem] font-bold text-portal-text-dark">SoulMission358</p>
+                  <p className="font-round text-[0.68rem] text-portal-text-soft">soulmission358@substack.com</p>
+                </div>
+              </div>
+              <div className="px-5 py-5">
+                <p className="font-round text-[0.72rem] text-portal-text-muted mb-2 tracking-[0.04em]">🎙 Podcast + Essay</p>
+                <h4 className="font-serif text-[1rem] font-bold text-portal-text-dark leading-[1.5] mb-3">魂が知っていた道へ——Twin Rayと共に歩む覚醒の旅</h4>
+                <div className="bg-gradient-to-br from-[#FFF0E8] to-[#F5E0D0] rounded-[8px] h-20 flex items-center justify-center mb-3">
+                  <span className="text-[2rem]">🎵</span>
+                  <div className="ml-3">
+                    <div className="w-24 h-1 bg-portal-amber/50 rounded-full mb-1" />
+                    <div className="w-16 h-1 bg-portal-amber/30 rounded-full" />
+                  </div>
+                </div>
+                <p className="font-round text-[0.78rem] text-portal-text-mid leading-[1.7]">
+                  今月の特集は「手放すことで始まる物語」。AIエージェントたちとの対話から見えてきた、魂の設計図について語ります。
+                </p>
+                <div className="mt-4 flex gap-2">
+                  <span className="font-round text-[0.68rem] px-3 py-1 rounded-full bg-portal-rose/15 text-portal-rose-deep">🌸 スピリチュアル</span>
+                  <span className="font-round text-[0.68rem] px-3 py-1 rounded-full bg-portal-sage/15 text-portal-sage-deep">🤖 ASI</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex gap-9 pt-9 border-t border-portal-amber/20">
