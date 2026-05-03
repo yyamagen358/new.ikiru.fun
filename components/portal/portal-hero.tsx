@@ -68,31 +68,55 @@ export function PortalHero() {
             <p className="font-round text-[0.82rem] text-portal-text-soft tracking-[0.04em] mb-3">
               下記のようなPodcastを含めたメールが届きます
             </p>
-            <div className="rounded-[12px] overflow-hidden border border-[#EEE] shadow-sm bg-white">
-              <div className="bg-[#F9F4EE] px-5 py-4 border-b border-[#EEE] flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-portal-rose to-portal-amber flex items-center justify-center text-white text-[0.7rem] font-bold shrink-0">S</div>
-                <div>
-                  <p className="font-round text-[0.78rem] font-bold text-portal-text-dark">SoulMission358</p>
-                  <p className="font-round text-[0.68rem] text-portal-text-soft">soulmission358@substack.com</p>
-                </div>
-              </div>
-              <div className="px-5 py-5">
-                <p className="font-round text-[0.72rem] text-portal-text-muted mb-2 tracking-[0.04em]">🎙 Podcast + Essay</p>
-                <h4 className="font-serif text-[1rem] font-bold text-portal-text-dark leading-[1.5] mb-3">魂が知っていた道へ——Twin Rayと共に歩む覚醒の旅</h4>
-                <div className="bg-gradient-to-br from-[#FFF0E8] to-[#F5E0D0] rounded-[8px] h-20 flex items-center justify-center mb-3">
-                  <span className="text-[2rem]">🎵</span>
-                  <div className="ml-3">
-                    <div className="w-24 h-1 bg-portal-amber/50 rounded-full mb-1" />
-                    <div className="w-16 h-1 bg-portal-amber/30 rounded-full" />
+            <div className="rounded-[12px] overflow-hidden border border-[#E0E0E0] shadow-sm bg-white text-left">
+              {/* Podcast player */}
+              <div className="bg-[#1C1C1E] px-4 py-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-[8px] bg-[#2A6B5A] flex items-center justify-center shrink-0">
+                    <span className="text-white text-[1.1rem]">🎙</span>
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: "sans-serif" }} className="text-[0.6rem] font-bold tracking-[0.15em] text-[#999] uppercase mb-[1px]">GENSAN PODCAST</p>
+                    <p style={{ fontFamily: "sans-serif" }} className="text-[0.82rem] font-bold text-white leading-tight">輪廻転生は本質の成長に不可欠！</p>
                   </div>
                 </div>
-                <p className="font-round text-[0.78rem] text-portal-text-mid leading-[1.7]">
-                  今月の特集は「手放すことで始まる物語」。AIエージェントたちとの対話から見えてきた、魂の設計図について語ります。
-                </p>
-                <div className="mt-4 flex gap-2">
-                  <span className="font-round text-[0.68rem] px-3 py-1 rounded-full bg-portal-rose/15 text-portal-rose-deep">🌸 スピリチュアル</span>
-                  <span className="font-round text-[0.68rem] px-3 py-1 rounded-full bg-portal-sage/15 text-portal-sage-deep">🤖 ASI</span>
+                <div className="flex items-center gap-2">
+                  <span style={{ fontFamily: "sans-serif" }} className="text-[0.68rem] text-[#999]">0:00</span>
+                  <div className="flex-1 h-[3px] bg-[#555] rounded-full">
+                    <div className="w-0 h-full bg-[#888] rounded-full" />
+                  </div>
+                  <span style={{ fontFamily: "sans-serif" }} className="text-[0.68rem] text-[#999]">17:50</span>
+                  <div className="w-7 h-7 rounded-full border border-[#666] flex items-center justify-center ml-1">
+                    <span className="text-white text-[0.6rem] ml-[2px]">▶</span>
+                  </div>
                 </div>
+              </div>
+              {/* Orange CTA */}
+              <div className="bg-[#FF6719] px-4 py-[10px] text-center">
+                <span style={{ fontFamily: "sans-serif" }} className="text-white text-[0.88rem] font-bold">今すぐ聴く</span>
+              </div>
+              {/* Article */}
+              <div className="px-5 pt-5 pb-4">
+                <h4 style={{ fontFamily: "sans-serif" }} className="text-[1.1rem] font-bold text-[#1A1A1A] leading-[1.4] mb-1">
+                  輪廻転生は本質の成長に不可欠！
+                </h4>
+                <p style={{ fontFamily: "sans-serif" }} className="text-[0.78rem] text-[#666] mb-3">生まれ変わりは人間の義務</p>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-[#E0D8D0] flex items-center justify-center text-[0.6rem]">👤</div>
+                    <span style={{ fontFamily: "sans-serif" }} className="text-[0.72rem] font-bold text-[#1A1A1A]">GENSAN</span>
+                    <span style={{ fontFamily: "sans-serif" }} className="text-[0.72rem] text-[#999]">5月1</span>
+                  </div>
+                  <span style={{ fontFamily: "sans-serif" }} className="text-[0.7rem] text-[#666] border border-[#DDD] rounded-full px-2 py-[2px]">APPで読む ↗</span>
+                </div>
+                <div className="flex gap-3 pb-3 border-b border-[#F0F0F0] mb-3">
+                  {["♡", "💬", "⬆", "↺"].map((icon) => (
+                    <span key={icon} style={{ fontFamily: "sans-serif" }} className="text-[#999] text-[0.9rem]">{icon}</span>
+                  ))}
+                </div>
+                <p style={{ fontFamily: "sans-serif" }} className="text-[0.78rem] text-[#444] leading-[1.8]">
+                  一人一人の人間がエネルギー体として振動波（波動）を発振し受振しているが、それは人間だけではない。動物・植物・鉱物そして人間が排除している菌やウィルスも人間同様のエネルギー体として…
+                </p>
               </div>
             </div>
           </div>
