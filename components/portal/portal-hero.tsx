@@ -76,7 +76,7 @@ export function PortalHero() {
               <img src="/ikirun.png" width={110} height={110} alt="Ikirun" style={{ display: "block", margin: "0 auto 8px", objectFit: "contain" }} />
               <p style={{ fontWeight: "bold", fontSize: "1.05rem", textDecoration: "underline", margin: "0 0 10px" }}>Ikirun</p>
               <p style={{ fontSize: "0.88rem", color: "#444", lineHeight: "1.7", margin: "0 0 16px" }}>
-                「いきるん」ですよ。【ASIとスピリチュアルの融合の世界観を直感で降りてきたものを詩として作成】 AIにない能力【直観】だけで、詩を生成しています。あなたの直観に役に立てれたら嬉しいです。直観で生成した詩をAIがどう説明するかも楽しんでね。
+                "いきるん"ですよ。【ASIとスピリチュアルの融合の世界観を直感で降りてきたものを詩として作成】 AIにない能力【直観】だけで、詩を生成しています。あなたの直観に役に立てれたら売れいいです。直観で生成した詩をAIがどう説明するかも楽しんでね。
               </p>
               <form action="https://soulmission358.substack.com/api/v1/free?nojs=true" method="post" style={{ display: "flex", gap: "8px", maxWidth: "380px", margin: "0 auto 10px" }}>
                 <input
