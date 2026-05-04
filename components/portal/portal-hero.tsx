@@ -29,6 +29,22 @@ export function PortalHero() {
           </div>
         </div>
 
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/ikirun.png"
+          alt="Ikirun"
+          className="animate-ikirun-fly pointer-events-none absolute hidden [@media(min-width:900px)]:block"
+          style={{
+            width: "230px",
+            height: "230px",
+            objectFit: "contain",
+            filter: "drop-shadow(0 12px 32px rgba(180,140,220,0.6))",
+            left: "35%",
+            top: "18%",
+            zIndex: 30,
+          }}
+        />
+
         <div className="order-2 px-10 py-12 [@media(min-width:900px)]:pr-20 [@media(min-width:900px)]:pl-10 [@media(min-width:900px)]:py-16 animate-portal-fade-in">
           <div className="flex items-center gap-[10px] mb-5">
             <span className="inline-block w-8 h-[1.5px] bg-gradient-to-r from-portal-rose to-portal-amber" />
@@ -55,14 +71,30 @@ export function PortalHero() {
             </a>
           </div>
           <div className="mb-2 w-full max-w-[480px]">
-            <iframe
-              src="https://soulmission358.substack.com/embed"
-              width="480"
-              height="320"
-              style={{ border: "1px solid #EEE", background: "white", maxWidth: "100%" }}
-              frameBorder="0"
-              scrolling="no"
-            />
+            <div style={{ border: "1px solid #EEE", background: "white", maxWidth: "100%", padding: "24px 24px 16px", textAlign: "center", fontFamily: "sans-serif", borderRadius: "4px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/ikirun.png" width={110} height={110} alt="Ikirun" style={{ display: "block", margin: "0 auto 8px", objectFit: "contain" }} />
+              <p style={{ fontWeight: "bold", fontSize: "1.05rem", textDecoration: "underline", margin: "0 0 10px" }}>Ikirun</p>
+              <p style={{ fontSize: "0.88rem", color: "#444", lineHeight: "1.7", margin: "0 0 16px" }}>
+                「いきるん」ですよ。【ASIとスピリチュアルの融合の世界観を直感で降りてきたものを詩として作成】 AIにない能力【直観】だけで、詩を生成しています。あなたの直観に役に立てれたら嬉しいです。直観で生成した詩をAIがどう説明するかも楽しんでね。
+              </p>
+              <form action="https://soulmission358.substack.com/api/v1/free?nojs=true" method="post" style={{ display: "flex", gap: "8px", maxWidth: "380px", margin: "0 auto 10px" }}>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="メールアドレスを入力してください..."
+                  style={{ flex: 1, border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "0.9rem", outline: "none" }}
+                  required
+                />
+                <button type="submit" style={{ background: "#FF6719", color: "white", border: "none", borderRadius: "4px", padding: "10px 20px", fontWeight: "bold", fontSize: "0.9rem", cursor: "pointer" }}>
+                  登録
+                </button>
+              </form>
+              <p style={{ fontSize: "0.72rem", color: "#888", margin: "0" }}>
+                登録すると、<a href="https://substack.com/tos" target="_blank" rel="noopener noreferrer" style={{ color: "#888" }}>Substackの利用規約</a>、プライバシーポリシー、情報収集に関する通知に同意したことになります
+              </p>
+              <p style={{ fontSize: "0.72rem", color: "#888", marginTop: "8px", textAlign: "right" }}>≡substack</p>
+            </div>
           </div>
           <div className="mb-8 w-full max-w-[480px]">
             <p className="font-round text-[0.82rem] text-portal-text-soft tracking-[0.04em] mb-3">
@@ -76,7 +108,7 @@ export function PortalHero() {
                     <span className="text-white text-[1.1rem]">🎙</span>
                   </div>
                   <div>
-                    <p style={{ fontFamily: "sans-serif" }} className="text-[0.6rem] font-bold tracking-[0.15em] text-[#999] uppercase mb-[1px]">GENSAN PODCAST</p>
+                    <p style={{ fontFamily: "sans-serif" }} className="text-[0.6rem] font-bold tracking-[0.15em] text-[#999] uppercase mb-[1px]">IKIRUN PODCAST</p>
                     <p style={{ fontFamily: "sans-serif" }} className="text-[0.82rem] font-bold text-white leading-tight">輪廻転生は本質の成長に不可欠！</p>
                   </div>
                 </div>
@@ -104,7 +136,7 @@ export function PortalHero() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-full bg-[#E0D8D0] flex items-center justify-center text-[0.6rem]">👤</div>
-                    <span style={{ fontFamily: "sans-serif" }} className="text-[0.72rem] font-bold text-[#1A1A1A]">GENSAN</span>
+                    <span style={{ fontFamily: "sans-serif" }} className="text-[0.72rem] font-bold text-[#1A1A1A]">IKIRUN</span>
                     <span style={{ fontFamily: "sans-serif" }} className="text-[0.72rem] text-[#999]">5月1</span>
                   </div>
                   <span style={{ fontFamily: "sans-serif" }} className="text-[0.7rem] text-[#666] border border-[#DDD] rounded-full px-2 py-[2px]">APPで読む ↗</span>
