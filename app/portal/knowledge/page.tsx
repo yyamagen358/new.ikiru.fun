@@ -101,7 +101,7 @@ export default function KnowledgePage() {
             />
           </div>
           <a
-            href="/portal"
+            href="/"
             className="inline-flex items-center gap-2 font-round text-[0.88rem] font-medium text-portal-text-soft tracking-[0.04em] px-6 py-3 rounded-full border-[1.5px] border-portal-sage/30 bg-transparent transition-all duration-200 hover:bg-portal-sage-light hover:border-portal-sage hover:text-portal-sage-deep"
           >
             <span>←</span> ポータルに戻る

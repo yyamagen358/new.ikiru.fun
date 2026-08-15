@@ -95,7 +95,7 @@ export default function ConnectPage() {
             />
           </div>
           <a
-            href="/portal"
+            href="/"
             className="inline-flex items-center gap-2 font-round text-[0.88rem] font-medium text-portal-text-soft tracking-[0.04em] px-6 py-3 rounded-full border-[1.5px] border-portal-lavender/30 bg-transparent transition-all duration-200 hover:bg-portal-lavender-light hover:border-portal-lavender hover:text-portal-lavender-deep"
           >
             <span>←</span> ポータルに戻る

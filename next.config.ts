@@ -38,7 +38,9 @@ const MOVED: { source: string; destination: string }[] = [
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return OLD_APEX_HOSTS.flatMap((host) => {
+    // ポータル本体は / に置いた。旧 /portal は恒久リダイレクトで受ける。
+    // 配下の /portal/heal などはそのまま残すので、source は完全一致にする。
+    const oldApex = OLD_APEX_HOSTS.flatMap((host) => {
       const hasOldHost = [{ type: "host" as const, value: host }];
 
       return [
@@ -57,6 +59,11 @@ const nextConfig: NextConfig = {
         },
       ];
     });
+
+    return [
+      { source: "/portal", destination: "/", permanent: true },
+      ...oldApex,
+    ];
   },
 };
 

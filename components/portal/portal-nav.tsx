@@ -16,7 +16,7 @@ export function PortalNav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-[68px] flex items-center justify-between px-6 [@media(min-width:900px)]:px-12 bg-portal-cream/92 backdrop-blur-[12px] border-b border-portal-amber/15 animate-portal-fade-in">
-      <a href="/portal" className="font-serif text-[1.4rem] font-bold tracking-[0.04em] text-portal-text-dark leading-none select-none">
+      <a href="/" className="font-serif text-[1.4rem] font-bold tracking-[0.04em] text-portal-text-dark leading-none select-none">
         AI{" "}
         <span className="bg-gradient-to-br from-portal-rose to-portal-amber bg-clip-text text-transparent">
           Nation
