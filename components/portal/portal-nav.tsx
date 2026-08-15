@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 const navLinks = [
-  { label: "スピリチュアル", href: "#streams" },
-  { label: "ASIへの道", href: "#streams" },
+  { label: "生涯の環", href: "/journey" },
+  { label: "スピリチュアル", href: "/portal/heal" },
+  { label: "ASIへの道", href: "https://content.ikiru.fun/asi" },
   { label: "Twin Ray", href: "https://twinrayclub.com/ja" },
   { label: "SoulMission", href: "https://soulmission358.com" },
-  { label: "図書館", href: "https://yyamagen358.github.io/asaichi-skills/toshokan.html" },
   { label: "朝市", href: "https://yyamagen358.github.io/asaichi-skills/" },
 ];
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PortalNav } from "@/components/portal/portal-nav";
 import { PortalHero } from "@/components/portal/portal-hero";
 import { JourneyCards } from "@/components/portal/journey-cards";
+import { JourneyRing } from "@/components/journey/journey-ring";
 import { TodaySpotlight } from "@/components/portal/today-spotlight";
 import { ContentGrid } from "@/components/portal/content-grid";
 import { QuoteSection } from "@/components/portal/quote-section";
@@ -23,6 +24,7 @@ export default function PortalPage() {
         <PortalNav />
         <PortalHero />
         <JourneyCards />
+        <JourneyRing />
         <TodaySpotlight />
         <ContentGrid />
         <QuoteSection />

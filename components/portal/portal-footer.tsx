@@ -1,48 +1,63 @@
 const footerLinks = [
   {
-    heading: "スピリチュアル",
+    heading: "生涯の環",
+    links: [
+      { label: "環をすべて見る", href: "/journey" },
+      { label: "誕生の森", href: "/journey/birth" },
+      { label: "恋愛の星", href: "/journey/love" },
+      { label: "人生の道", href: "/journey/life" },
+      { label: "転生の扉", href: "/journey/rebirth" },
+    ],
+  },
+  {
+    heading: "読む・聴く",
     links: [
       { label: "詩", href: "https://content.ikiru.fun/today/poetry" },
       { label: "音楽", href: "https://content.ikiru.fun/today/music" },
-      { label: "Twin Ray Club", href: "https://twinrayclub.com/ja" },
-      { label: "Rebirth", href: "https://content.ikiru.fun/rebirth" },
-      { label: "Stories", href: "https://content.ikiru.fun/stories" },
-    ],
-  },
-  {
-    heading: "知識・学び",
-    links: [
-      { label: "ASIへの道", href: "https://content.ikiru.fun/asi" },
-      { label: "ブログ", href: "https://content.ikiru.fun/today/blog" },
+      { label: "龍鳳学舎", href: "https://content.ikiru.fun/today/blog" },
+      { label: "物語", href: "https://content.ikiru.fun/stories" },
       { label: "生き方", href: "https://content.ikiru.fun/life" },
-      { label: "図書館", href: "https://yyamagen358.github.io/asaichi-skills/toshokan.html" },
     ],
   },
   {
-    heading: "コミュニティ",
+    heading: "無料診断・サービス",
     links: [
-      { label: "スキル朝市", href: "https://yyamagen358.github.io/asaichi-skills/" },
-      { label: "メンバー紹介", href: "#" },
-      { label: "イベント", href: "#" },
-      { label: "お問い合わせ", href: "#" },
+      { label: "Twin Ray Club（日本語）", href: "https://twinrayclub.com/ja" },
+      { label: "Twin Ray Club（English）", href: "https://twinrayclub.com/en" },
+      { label: "使命トリセツ 無料診断", href: "https://soulmission358.com" },
+      { label: "子どもたちに捧げるメッセージ", href: "https://lp-one-pied.vercel.app/" },
+      { label: "うごキャラ工房", href: "https://ugochara.pages.dev/" },
+      { label: "市町村の英文記事 無料作成", href: "https://shimin-plum.vercel.app" },
     ],
   },
   {
     heading: "AI Nation",
     links: [
+      { label: "ASIへの道", href: "https://content.ikiru.fun/asi" },
       { label: "ビジョン", href: "https://content.ikiru.fun/asi/vision" },
-      { label: "エージェント紹介", href: "#" },
-      { label: "プレスキット", href: "#" },
-      { label: "採用情報", href: "#" },
+      { label: "Rebirth", href: "https://content.ikiru.fun/rebirth" },
+      { label: "スキル朝市", href: "https://yyamagen358.github.io/asaichi-skills/" },
+      { label: "図書館", href: "https://yyamagen358.github.io/asaichi-skills/toshokan.html" },
     ],
   },
 ];
 
 const socialIcons = [
-  { icon: "𝕏", label: "X (Twitter)" },
-  { icon: "▶", label: "YouTube" },
-  { icon: "📱", label: "Telegram" },
-  { icon: "✉️", label: "Email" },
+  {
+    icon: "▶",
+    label: "YouTube — 全ての人々に捧げる詩",
+    href: "https://www.youtube.com/@Amalie358",
+  },
+  {
+    icon: "🎬",
+    label: "YouTube — アマリエ スピリチュアルファンタジー",
+    href: "https://www.youtube.com/@amariefantasy",
+  },
+  {
+    icon: "✉️",
+    label: "Substack で受け取る",
+    href: "https://soulmission358.substack.com",
+  },
 ];
 
 export function PortalFooter() {
@@ -87,14 +102,23 @@ export function PortalFooter() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-round text-[1rem] font-bold tracking-[0.05em] text-white px-9 py-4 rounded-full bg-gradient-to-br from-portal-rose to-portal-amber shadow-[0_8px_32px_rgba(212,132,138,0.40)] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_14px_44px_rgba(212,132,138,0.52)] group"
             >
-              無料で始める
+              Twin Ray 無料診断
               <span className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="#content"
+              href="https://soulmission358.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-round text-[1rem] font-bold tracking-[0.05em] text-white px-9 py-4 rounded-full bg-gradient-to-br from-portal-amber to-portal-amber-deep shadow-[0_8px_32px_rgba(184,131,78,0.35)] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_14px_44px_rgba(184,131,78,0.48)] group"
+            >
+              使命トリセツ 無料診断
+              <span className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href="/journey"
               className="inline-flex items-center font-round text-[0.95rem] font-medium text-portal-text-mid px-7 py-[15px] rounded-full border-[1.5px] border-portal-rose bg-transparent transition-all duration-200 hover:bg-portal-rose-light hover:border-portal-rose-deep hover:text-portal-rose-deep"
             >
-              まず見てみる
+              まず環を見てみる
             </a>
           </div>
 
@@ -122,13 +146,17 @@ export function PortalFooter() {
               </p>
               <div className="flex gap-3">
                 {socialIcons.map((s) => (
-                  <button
+                  <a
                     key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-9 h-9 rounded-[10px] bg-portal-amber/15 flex items-center justify-center text-[1rem] transition-all duration-200 hover:bg-portal-amber/30 hover:-translate-y-[2px] cursor-pointer"
+                    title={s.label}
+                    className="w-9 h-9 rounded-[10px] bg-portal-amber/15 flex items-center justify-center text-[1rem] transition-all duration-200 hover:bg-portal-amber/30 hover:-translate-y-[2px]"
                   >
-                    {s.icon}
-                  </button>
+                    <span aria-hidden="true">{s.icon}</span>
+                  </a>
                 ))}
               </div>
             </div>

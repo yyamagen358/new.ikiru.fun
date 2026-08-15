@@ -69,6 +69,64 @@ export function SkillMarketStrip() {
           </a>
         </div>
       </div>
+
+      {/* 実際に動いている制作サービス */}
+      <div className="relative z-10 max-w-[1100px] mx-auto mt-14 pt-10 border-t border-white/12">
+        <p
+          className="font-round text-[0.75rem] font-bold tracking-[0.28em] uppercase mb-6"
+          style={{ color: "rgba(255,248,240,0.5)" }}
+        >
+          Now Serving — 稼働中の制作サービス
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {[
+            {
+              emoji: "🐾",
+              name: "うごキャラ工房",
+              desc: "あなたのマスコットキャラクターを、動くかたちで。塾・歯科・動物病院などの現場で使えるところまで作ります。",
+              href: "https://ugochara.pages.dev/",
+            },
+            {
+              emoji: "🗾",
+              name: "市町村の英文記事 無料作成",
+              desc: "日本の市町村を海外へ紹介する英文記事を、無料でお作りします。自治体のご担当者さまへ。",
+              href: "https://shimin-plum.vercel.app",
+            },
+          ].map((s) => (
+            <a
+              key={s.href}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-[18px] p-6 transition-all duration-200 hover:-translate-y-1"
+              style={{
+                background: "rgba(255,248,240,0.06)",
+                border: "1px solid rgba(255,248,240,0.16)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-[1.4rem]" aria-hidden="true">
+                  {s.emoji}
+                </span>
+                <h3 className="font-serif text-[1.1rem] font-bold text-portal-cream">{s.name}</h3>
+              </div>
+              <p
+                className="font-round text-[0.85rem] leading-[1.85] mb-4"
+                style={{ color: "rgba(255,248,240,0.62)" }}
+              >
+                {s.desc}
+              </p>
+              <span
+                className="font-round text-[0.8rem] font-bold tracking-[0.05em] flex items-center gap-1 group-hover:gap-2 transition-all duration-200"
+                style={{ color: "rgba(255,248,240,0.9)" }}
+              >
+                見てみる
+                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
