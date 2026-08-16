@@ -8,11 +8,11 @@ const stats = [
 
 export function PortalHero() {
   return (
-    <section className="relative min-h-screen pt-[68px] overflow-hidden bg-gradient-to-br from-portal-cream via-[#FDF0E8] to-[#FBE8DA]">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-portal-cream via-[#FDF0E8] to-[#FBE8DA]">
       <div className="pointer-events-none absolute -top-24 -right-48 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(232,180,184,0.18)_0%,transparent_70%)]" />
       <div className="pointer-events-none absolute -bottom-20 -left-24 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(143,174,139,0.15)_0%,transparent_70%)]" />
 
-      <div className="relative z-10 grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 items-center min-h-[calc(100vh-68px)]">
+      <div className="relative z-10 grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 items-center min-h-[calc(100vh-106px)]">
         <div className="flex items-center justify-center px-10 py-16 [@media(min-width:900px)]:pl-20 [@media(min-width:900px)]:pr-10 [@media(min-width:900px)]:py-16 order-1">
           <div className="relative w-[340px] h-[340px] [@media(min-width:900px)]:w-[420px] [@media(min-width:900px)]:h-[420px] animate-portal-float">
             <div className="absolute -inset-5 rounded-full bg-[radial-gradient(circle,rgba(232,180,184,0.4)_0%,transparent_70%)] animate-portal-pulse" />

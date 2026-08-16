@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PortalNav } from "@/components/portal/portal-nav";
+import { SkyBand } from "@/components/portal/sky-band";
 import { PortalHero } from "@/components/portal/portal-hero";
 import { JourneyCards } from "@/components/portal/journey-cards";
 import { JourneyRing } from "@/components/journey/journey-ring";
@@ -29,6 +30,7 @@ export default function HomePage() {
     <PortalScrollWrapper>
       <div className="font-round bg-portal-cream text-portal-text-dark">
         <PortalNav />
+        <SkyBand />
         <PortalHero />
         <JourneyCards />
         <JourneyRing />
