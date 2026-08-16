@@ -51,7 +51,7 @@ type Schedule = { generatedAt: string; days: Day[] };
  */
 const FRAME: Slot[] = [
   { time: "06:00", key: "poetry",  label: "朝の一篇",             sub: "起き抜けに、声で受け取る" },
-  { time: "08:00", key: "blog",    label: "龍鳳学舎",             sub: "通勤と家事の時間に、学びをひとつ" },
+  { time: "08:00", key: "ryuho",   label: "龍鳳学舎",             sub: "龍先生と鳳凰ちゃんの対話を、動画で" },
   { time: "10:00", key: "english", label: "English Poem",         sub: "画像1枚。海外の時間帯にも届く" },
   { time: "12:00", key: "manga",   label: "昼の4コマ",            sub: "昼休みに、軽く笑って軽く効く" },
   { time: "14:00", key: "stories", label: "物語",                 sub: "午後の読み物" },
