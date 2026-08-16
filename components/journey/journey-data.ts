@@ -28,6 +28,9 @@ export type Station = {
   cy: number;
   /** 色（すべてリテラル。Tailwind の静的抽出のため） */
   stroke: string;
+  /** 夜の環で使う色。暗い地の上では既存トークンだと沈むので、明度を上げた対の色を持つ */
+  lightStroke: string;
+  glow: string;
   heroBg: string;
   cardBg: string;
   cardBorder: string;
@@ -53,6 +56,8 @@ export const stations: Station[] = [
     cx: 360,
     cy: 75,
     stroke: "var(--portal-sage-deep)",
+    lightStroke: "#9FCF9A",
+    glow: "rgba(143,174,139,0.34)",
     heroBg: "bg-gradient-to-br from-[#F4F7F4] via-[#E8F0E8] to-[#D8E8D8]",
     cardBg: "bg-gradient-to-br from-[#F4F7F4] via-[#E8F0E8] to-[#D8E8D8]",
     cardBorder: "border-portal-sage/40",
@@ -96,6 +101,8 @@ export const stations: Station[] = [
     cx: 535,
     cy: 250,
     stroke: "var(--portal-rose-deep)",
+    lightStroke: "#F0A9AF",
+    glow: "rgba(232,180,184,0.34)",
     heroBg: "bg-gradient-to-br from-[#FDF5F5] via-[#F9E8EA] to-[#F5D8DA]",
     cardBg: "bg-gradient-to-br from-[#FDF5F5] via-[#F9E8EA] to-[#F5D8DA]",
     cardBorder: "border-portal-rose/40",
@@ -139,6 +146,8 @@ export const stations: Station[] = [
     cx: 360,
     cy: 425,
     stroke: "var(--portal-amber-deep)",
+    lightStroke: "#E8B87A",
+    glow: "rgba(212,165,116,0.34)",
     heroBg: "bg-gradient-to-br from-[#FFF6EC] via-[#FBEAD6] to-[#F3DCC2]",
     cardBg: "bg-gradient-to-br from-[#FFF6EC] via-[#FBEAD6] to-[#F3DCC2]",
     cardBorder: "border-portal-amber/40",
@@ -194,6 +203,8 @@ export const stations: Station[] = [
     cx: 185,
     cy: 250,
     stroke: "var(--portal-lavender-deep)",
+    lightStroke: "#C0AEE0",
+    glow: "rgba(184,169,201,0.34)",
     heroBg: "bg-gradient-to-br from-[#F5F3F8] via-[#EBE6F2] to-[#DDD6EA]",
     cardBg: "bg-gradient-to-br from-[#F5F3F8] via-[#EBE6F2] to-[#DDD6EA]",
     cardBorder: "border-portal-lavender/40",
