@@ -18,6 +18,10 @@ import { PortalScrollWrapper } from "@/components/portal/portal-scroll-wrapper";
  * 以前は / が /portal へ 307 リダイレクトしており、いちばん強いURLが空だった。
  * title は absolute にしないと layout の template が効いて
  * 「AI Nation — 生きるを再定義する | AI Nation」と重複する。
+ *
+ * 並びは 今日の空 → 番組表 → 名乗り。毎日ひらく理由を先に出し、
+ * 「で、ここは何なのか」は後ろで説明する。ヒーローが min-h-screen なので、
+ * 番組表を後ろに置くと丸1画面ぶん下がって初回訪問では存在しないに等しかった。
  */
 export const metadata: Metadata = {
   title: { absolute: "AI Nation — 生きるを再定義する" },
@@ -32,8 +36,8 @@ export default function HomePage() {
       <div className="font-round bg-portal-cream text-portal-text-dark">
         <PortalNav />
         <SkyBand />
-        <PortalHero />
         <Broadcast />
+        <PortalHero />
         <JourneyCards />
         <JourneyRing />
         <TodaySpotlight />
