@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PortalNav } from "@/components/portal/portal-nav";
 import { SkyBand } from "@/components/portal/sky-band";
+import { Broadcast } from "@/components/portal/broadcast";
 import { PortalHero } from "@/components/portal/portal-hero";
 import { JourneyCards } from "@/components/portal/journey-cards";
 import { JourneyRing } from "@/components/journey/journey-ring";
@@ -32,6 +33,7 @@ export default function HomePage() {
         <PortalNav />
         <SkyBand />
         <PortalHero />
+        <Broadcast />
         <JourneyCards />
         <JourneyRing />
         <TodaySpotlight />
