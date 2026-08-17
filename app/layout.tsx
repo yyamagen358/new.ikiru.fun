@@ -57,6 +57,19 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
+      <head>
+        {/*
+          訪問者数の計測（自前の Umami / umami.yyamagen358.com）。
+          cookie を置かず個人を特定する情報も持たないので、同意バナーは要らない。
+          defer なので表示を待たせない。落ちてもページには影響しない。
+          結果は毎朝 07:35 に yyamagen@gmail.com へ届く。
+        */}
+        <script
+          defer
+          src="https://umami.yyamagen358.com/script.js"
+          data-website-id="a8146337-d8fe-487e-842d-9bb5da10ea7e"
+        />
+      </head>
       <body
         className={`${notoSansJP.variable} ${notoSerifJP.variable} ${zenMaruGothic.variable} antialiased font-sans`}
       >
