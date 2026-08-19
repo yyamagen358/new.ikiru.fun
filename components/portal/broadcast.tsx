@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 /**
- * 番組表 — 1日12枠、2時間おきに1本ずつ公開される。
+ * 番組表 — 1日24枠、1時間おきに1本ずつ公開される。
  *
  * content.ikiru.fun が schedule.json を焼き、ここはそれを読むだけ。
- * 公開判定はブラウザの時計で行うので、静的サイトのままで2時間ごとに画面が変わる。
+ * 公開判定はブラウザの時計で行うので、静的サイトのままで1時間ごとに画面が変わる。
  *
  * Yahoo に無くてこれにできるのが「予告」。次に何が出るかを約束できる。
  * ただし約束するからには、枠が埋まらないのに時刻だけ進む状態を作ってはいけない。
@@ -50,18 +50,30 @@ type Schedule = { generatedAt: string; days: Day[] };
  * 一瞬だけ古い枠名が見えるだけで済むようにしてある）。
  */
 const FRAME: Slot[] = [
-  { time: "06:00", key: "poetry",  label: "朝の一篇",             sub: "起き抜けに、声で受け取る" },
-  { time: "08:00", key: "ryuho",   label: "龍鳳学舎",             sub: "龍先生と鳳凰ちゃんの対話を、動画で" },
-  { time: "10:00", key: "english", label: "English Poem",         sub: "画像1枚。海外の時間帯にも届く" },
-  { time: "12:00", key: "manga",   label: "昼の4コマ",            sub: "昼休みに、軽く笑って軽く効く" },
-  { time: "14:00", key: "stories", label: "物語",                 sub: "午後の読み物" },
-  { time: "16:00", key: "kids",    label: "子どもたちへ",         sub: "子どもが帰ってくる時間" },
-  { time: "18:00", key: "slide",   label: "親子のスライドショー", sub: "夕食前に、親子で1本" },
-  { time: "20:00", key: "mondou",  label: "内観問答",             sub: "1日を振り返る時間" },
-  { time: "22:00", key: "music",   label: "夜の楽曲",             sub: "今日を閉じる音" },
-  { time: "00:00", key: "healing", label: "Healing",              sub: "眠りにつく前に" },
-  { time: "02:00", key: "rerun",   label: "眠れない人へ",         sub: "在庫から、もう一度" },
-  { time: "04:00", key: "silence", label: "静寂",                 sub: "何も出しません。今日の空だけが変わります", silence: true },
+  { time: "05:00", key: "hitokoto",  label: "アマリエ一言詩",       sub: "ひとことから、一日を始める" },
+  { time: "06:00", key: "poetry",    label: "朝の一篇",             sub: "起き抜けに、声で受け取る" },
+  { time: "07:00", key: "poemvid",   label: "本日の直観詩",         sub: "直観だけで降ろした詩を、映像で" },
+  { time: "08:00", key: "ryuho",     label: "龍鳳学舎",             sub: "龍先生と鳳凰ちゃんの対話を、動画で" },
+  { time: "09:00", key: "podcastA",  label: "詩のポッドキャスト",   sub: "詩を、声で受け取る" },
+  { time: "10:00", key: "english",   label: "English Poem",         sub: "画像1枚。海外の時間帯にも届く" },
+  { time: "11:00", key: "tfcA",      label: "Twin Flame Club",      sub: "ツインレイの道を歩く人へ" },
+  { time: "12:00", key: "manga",     label: "昼の4コマ",            sub: "昼休みに、軽く笑って軽く効く" },
+  { time: "13:00", key: "storysh",   label: "物語ショート",         sub: "物語を、短い映像で" },
+  { time: "14:00", key: "stories",   label: "物語",                 sub: "午後の読み物" },
+  { time: "15:00", key: "mondoushA", label: "内観問答ショート",     sub: "問いをひとつ、持ち歩く" },
+  { time: "16:00", key: "kids",      label: "子どもたちへ",         sub: "子どもが帰ってくる時間" },
+  { time: "17:00", key: "tfcB",      label: "Twin Flame Club",      sub: "もう1本、夕方に" },
+  { time: "18:00", key: "slide",     label: "親子のスライドショー", sub: "夕食前に、親子で1本" },
+  { time: "19:00", key: "mondoushB", label: "内観問答ショート",     sub: "夜のはじめに、問いをひとつ" },
+  { time: "20:00", key: "mondou",    label: "内観問答",             sub: "1日を振り返る時間" },
+  { time: "21:00", key: "podcastB",  label: "詩のポッドキャスト",   sub: "寝る前に、耳で" },
+  { time: "22:00", key: "music",     label: "夜の楽曲",             sub: "今日を閉じる音" },
+  { time: "23:00", key: "rerunA",    label: "もう一度",             sub: "在庫から、忘れられた1本" },
+  { time: "00:00", key: "healing",   label: "Healing",              sub: "眠りにつく前に" },
+  { time: "01:00", key: "silence1",  label: "静寂",                 sub: "何も出しません", silence: true },
+  { time: "02:00", key: "rerunB",    label: "眠れない人へ",         sub: "在庫から、もう一度" },
+  { time: "03:00", key: "silence3",  label: "静寂",                 sub: "何も出しません", silence: true },
+  { time: "04:00", key: "silence4",  label: "静寂",                 sub: "何も出しません。今日の空だけが変わります", silence: true },
 ];
 
 const KIND_MARK: Record<string, string> = { video: "▶", image: "◼", text: "✎" };
@@ -82,6 +94,11 @@ export function Broadcast() {
   const [error, setError] = useState(false);
   const [now, setNow] = useState<Date | null>(null);
   const [lastVisit, setLastVisit] = useState<number>(0);
+  /**
+   * 24枠を全部並べるとファーストビューを占領してしまう（12枠でも長かった）。
+   * 既定では「いま」とその前後だけを出し、残りは開いてもらう。
+   */
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     setNow(jstNow());
@@ -123,6 +140,18 @@ export function Broadcast() {
     : [];
   const currentMinutes = passed.length ? Math.max(...passed) : null;
 
+  /**
+   * 畳んだときに見せる範囲。
+   * 「いま放送中」の1つ前から、これから来る3枠まで。時刻が分からないうちは先頭5枠。
+   * 深夜の静寂だけが並ぶ画面にならないよう、必ず「いま」を含める。
+   */
+  const curIdx = currentMinutes === null
+    ? -1
+    : rows.findIndex((r) => slotMinutes(r.time) === currentMinutes);
+  const from = curIdx < 0 ? 0 : Math.max(0, curIdx - 1);
+  const shown = expanded ? rows : rows.slice(from, from + 5);
+  const hidden = rows.length - shown.length;
+
   return (
     <section
       id="broadcast"
@@ -151,7 +180,7 @@ export function Broadcast() {
         </div>
 
         <p className="font-round text-[0.92rem] text-portal-text-soft mb-6 leading-relaxed">
-          2時間おきに、ひとつずつ公開されます。まだ時間が来ていないものは予告です。
+          1時間おきに、ひとつずつ公開されます。まだ時間が来ていないものは予告です。
         </p>
 
         {error && (
@@ -167,7 +196,7 @@ export function Broadcast() {
         )}
 
         <ul className="list-none flex flex-col divide-y divide-portal-amber/15 border-y border-portal-amber/20">
-          {rows.map((s) => {
+          {shown.map((s) => {
             // 時刻が分かるまでは沈めない。SSR の一瞬だけ全枠が予告色になるのを避ける。
             const open = now ? minutesNow >= slotMinutes(s.time) : true;
             const fresh =
@@ -187,6 +216,25 @@ export function Broadcast() {
             );
           })}
         </ul>
+
+        {hidden > 0 && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="mt-4 font-round text-[0.85rem] font-bold text-portal-amber-deep tracking-[0.04em] px-5 py-[9px] rounded-full border-[1.5px] border-portal-amber/40 transition-colors duration-200 hover:bg-portal-cream-deep/70"
+          >
+            {expanded ? "畳む" : `24枠すべて見る（あと ${hidden} 枠）`}
+          </button>
+        )}
+        {expanded && (
+          <button
+            type="button"
+            onClick={() => setExpanded(false)}
+            className="mt-4 ml-3 font-round text-[0.85rem] text-portal-text-soft px-5 py-[9px]"
+          >
+            畳む
+          </button>
+        )}
       </div>
     </section>
   );
