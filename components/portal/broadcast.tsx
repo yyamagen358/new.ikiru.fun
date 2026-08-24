@@ -70,9 +70,9 @@ const FRAME: Slot[] = [
   { time: "22:00", key: "music",     label: "夜の楽曲",             sub: "今日を閉じる音" },
   { time: "23:00", key: "rerunA",    label: "もう一度",             sub: "在庫から、忘れられた1本" },
   { time: "00:00", key: "healing",   label: "Healing",              sub: "眠りにつく前に" },
-  { time: "01:00", key: "silence1",  label: "静寂",                 sub: "何も出しません", silence: true },
+  { time: "01:00", key: "mangavid",  label: "4コマ動画",            sub: "詩の4コマが、動きだす" },
   { time: "02:00", key: "rerunB",    label: "眠れない人へ",         sub: "在庫から、もう一度" },
-  { time: "03:00", key: "silence3",  label: "静寂",                 sub: "何も出しません", silence: true },
+  { time: "03:00", key: "mondoushEN", label: "Inner Dialogue Shorts", sub: "One question from Master Ryu" },
   { time: "04:00", key: "silence4",  label: "静寂",                 sub: "何も出しません。今日の空だけが変わります", silence: true },
 ];
 
@@ -235,6 +235,37 @@ export function Broadcast() {
             畳む
           </button>
         )}
+
+        {/*
+          番組表は「今日どう流れるか」を見せる。そのすぐ下に、時刻に縛られない
+          入口をひとつだけ置く。番組表を上から下まで見た人が次にどこへ行くかを
+          決められないまま離脱するのを防ぐための一手。
+          特集を増やすなら並べずに、いちばん強い1本だけをここに置くこと。
+        */}
+        <div className="mt-8 pt-7 border-t border-portal-amber/20">
+          <a
+            href={`${CONTENT_ORIGIN}/soul-theme`}
+            className="group flex items-center gap-4 rounded-2xl bg-portal-cream/60 border border-portal-amber/25 px-5 py-4 transition-colors duration-200 hover:bg-portal-cream-deep/70 hover:border-portal-amber/50"
+          >
+            <span className="text-2xl leading-none" aria-hidden="true">
+              🕯
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-serif text-[1.05rem] font-bold text-portal-text-dark leading-snug">
+                あなたの魂のテーマ探す特集
+              </span>
+              <span className="block font-round text-[0.85rem] text-portal-text-soft mt-[3px]">
+                80億の魂に、80億のテーマがある。ひとつずつ、置いていきます
+              </span>
+            </span>
+            <span
+              className="font-round text-[0.85rem] font-bold text-portal-amber-deep shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
