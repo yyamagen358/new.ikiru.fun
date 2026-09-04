@@ -21,6 +21,8 @@ type Answer = { q: string; a: string };
 
 const FROM = process.env.RESEND_FROM ?? "AI Nation <noreply@yyamagen358.com>";
 const REPLY_TO = process.env.RESEND_REPLY_TO ?? "noreply@yyamagen358.com";
+const UNSUB = (contactId: string) =>
+    `https://new.ikiru.fun/api/yobikake/unsubscribe?c=${encodeURIComponent(contactId)}`;
 const RESEND = "https://api.resend.com";
 
 function esc(s: string) {
@@ -63,14 +65,17 @@ export async function POST(req: Request) {
     const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 
     // 1) 配信リストに追加（Audience 未設定なら送信だけ行う）
+    //    contact.id は配信停止リンクに使うので受け取っておく
+    let contactId: string | null = null;
     const audienceId = process.env.RESEND_AUDIENCE_ID;
     if (audienceId) {
         try {
-            await fetch(`${RESEND}/audiences/${audienceId}/contacts`, {
+            const cr = await fetch(`${RESEND}/audiences/${audienceId}/contacts`, {
                 method: "POST",
                 headers,
                 body: JSON.stringify({ email, unsubscribed: false }),
             });
+            if (cr.ok) contactId = (await cr.json())?.id ?? null;
         } catch {
             // リスト追加の失敗で本人への返信まで止めない
         }
@@ -116,6 +121,15 @@ export async function POST(req: Request) {
             subject: "あなたが書いた3つ — 天空の呼びかけ",
             html,
             text,
+            // 明日から定期配信が始まるので、この1通目から配信停止手段を付ける
+            ...(contactId
+                ? {
+                      headers: {
+                          "List-Unsubscribe": `<${UNSUB(contactId)}>`,
+                          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                      },
+                  }
+                : {}),
         }),
     });
 
