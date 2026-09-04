@@ -28,19 +28,15 @@ function pick<T>(pool: T[], seed: string, salt: number): T {
 
 type Answer = { q: string; a: string; reply?: string };
 
-/**
- * 遷移先はソウルナンバー（使命トリセツ）。
- * このサイトでは portal-footer / journey-data と同じく soulmission358.com に統一する。
- * TwinRayClub のツインレイ段階診断とは別物なので取り違えないこと。
+/*
+ * 使命トリセツ（soulmission358.com）への導線は、意図的にここに置かない。
+ *
+ * 診断を受けても届く問いが変わらない段階で誘導すると、
+ * 「診断しても何も起きなかった」を先に体験させてしまう。
+ * ソウルナンバー別の出し分けが実装でき、翌朝のメールで
+ * 「あなたの問いが変わりました」と言えるようになってから、
+ * 配信4〜6日目のメール内で誘う。
  */
-const CTA = {
-    // ソウルナンバーごとに問いを出し分ける仕組みは未実装のため、
-    // ここでその効能を約束しない。実装できてから書き足すこと。
-    lead: "あなたが何をしに来たのか。それを言葉にするところから始まります。",
-    href: "https://soulmission358.com",
-    label: "使命トリセツ 無料診断",
-    note: "無料・生年月日だけで分かります",
-};
 
 export default function YobikakeClient({ qid }: { qid: string }) {
     const q1 = useMemo(() => byId.get(qid) ?? QUESTIONS[0], [qid]);
@@ -146,15 +142,6 @@ export default function YobikakeClient({ qid }: { qid: string }) {
                 </div>
 
                 <Subscribe answers={answers} />
-
-                <p className="mt-14 text-[17px] leading-[1.95] text-neutral-700">{CTA.lead}</p>
-                <a
-                    href={CTA.href}
-                    className="mt-6 block w-full rounded-full bg-neutral-900 py-4 text-center text-[17px] font-bold text-white transition hover:bg-neutral-700"
-                >
-                    {CTA.label}
-                </a>
-                <p className="mt-3 text-center text-[13px] text-neutral-400">{CTA.note}</p>
             </Shell>
         );
     }
