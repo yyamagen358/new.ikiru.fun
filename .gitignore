@@ -22,7 +22,7 @@ yarn-error.log*
 .vercel
 
 # omc internal state
-.omc/state/
+.omc/
 
 # claude code local settings
 .claude/
