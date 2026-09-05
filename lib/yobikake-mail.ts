@@ -25,6 +25,18 @@ export const FROM = process.env.RESEND_FROM ?? "AI Nation <noreply@yyamagen358.c
  */
 export const SITE = process.env.YOBIKAKE_SITE ?? "https://new.ikiru.fun";
 
+/** 使命トリセツ（診断）。7日目にだけ渡す */
+export const SOULMISSION = "https://soulmission358.com";
+
+/**
+ * 診断を案内する日。
+ *
+ * 3日目までは習慣が立っておらず、売り込みに見える。
+ * 7日目なら「7日続いた」ことへの贈り物として渡せるうえ、
+ * 本人の中に7つの答えが溜まっていて「反復」を語る材料がある。
+ */
+export const GIFT_DAY = 7;
+
 export function headers(key: string) {
   return { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 }
@@ -59,6 +71,51 @@ export function answerUrl(qid: string, day: number, contactId: string) {
   return `${SITE}/yobikake/answer?q=${qid}&d=${day}&c=${encodeURIComponent(contactId)}`;
 }
 
+/** 7日目に渡す診断への入口。#{contactId} を載せて、番号を1タップで返せるようにする。 */
+export function giftUrl(contactId: string) {
+  return `${SOULMISSION}/?from=yobikake&d=${GIFT_DAY}&c=${encodeURIComponent(contactId)}`;
+}
+
+/**
+ * 7日目だけ足すブロック。
+ *
+ * 売り込みにしない。7つ答えたという事実を返して、
+ * 「今日はいつもと違う角度の問い」として渡す。
+ */
+function giftHtml(contactId: string) {
+  return (
+    `<div style="background:#f7f7f7;border-radius:12px;padding:20px;margin:28px 0 0">` +
+    `<p style="margin:0 0 12px;font-size:15px;font-weight:bold">7日続きました。</p>` +
+    `<p style="margin:0 0 12px;font-size:15px;line-height:1.9">` +
+    `あなたはこれまで7つの問いに答えました。<br>` +
+    `答えたのは、ぜんぶ同じ一人です。</p>` +
+    `<p style="margin:0 0 18px;font-size:15px;line-height:1.9">` +
+    `その一人がどんな人なのかを、生年月日の数字から見てみます。<br>` +
+    `今日は、いつもと違う角度からの問いです。</p>` +
+    `<p style="margin:0 0 8px"><a href="${giftUrl(contactId)}" ` +
+    `style="display:inline-block;background:#1a1a1a;color:#fff;text-decoration:none;` +
+    `padding:13px 30px;border-radius:999px;font-size:15px;font-weight:bold">使命トリセツを見る</a></p>` +
+    `<p style="margin:0;font-size:13px;color:#8a8a8a">無料・登録不要・約1分</p>` +
+    `</div>`
+  );
+}
+
+function giftText(contactId: string) {
+  return [
+    "",
+    "7日続きました。",
+    "",
+    "あなたはこれまで7つの問いに答えました。",
+    "答えたのは、ぜんぶ同じ一人です。",
+    "",
+    "その一人がどんな人なのかを、生年月日の数字から見てみます。",
+    "今日は、いつもと違う角度からの問いです。",
+    giftUrl(contactId),
+    "無料・登録不要・約1分",
+    "",
+  ].join("\n");
+}
+
 /** 毎朝の1通。答えを強制せず、休んでも続くことを毎回書く。 */
 export function dailyMail(q: Q, day: number, contactId: string) {
   const unsub = unsubUrl(contactId);
@@ -87,6 +144,7 @@ export function dailyMail(q: Q, day: number, contactId: string) {
     `style="display:inline-block;background:#1a1a1a;color:#fff;text-decoration:none;` +
     `padding:13px 30px;border-radius:999px;font-size:15px;font-weight:bold">答えを書き残す</a></p>` +
     `<p style="font-size:14px;color:#777">書かなかった日があっても、問いは止まりません。</p>` +
+    (day === GIFT_DAY ? giftHtml(contactId) : "") +
     `<hr style="border:0;border-top:1px solid #e5e5e5;margin:28px 0">` +
     `<p style="font-size:12px;color:#9a9a9a">AI Nation — ${SITE}<br>` +
     `<a href="${unsub}" style="color:#9a9a9a">配信を止める</a></p>` +
@@ -97,8 +155,9 @@ export function dailyMail(q: Q, day: number, contactId: string) {
     (body.length ? body.join("\n") + "\n\n" : "") +
     `心の中で一度だけ答えてみてください。書き残しておくこともできます。\n` +
     `${answerUrl(q.id, day, contactId)}\n\n` +
-    `書かなかった日があっても、問いは止まりません。\n\n` +
-    `AI Nation — ${SITE}\n配信を止める: ${unsub}\n`;
+    `書かなかった日があっても、問いは止まりません。\n` +
+    (day === GIFT_DAY ? giftText(contactId) : "") +
+    `\nAI Nation — ${SITE}\n配信を止める: ${unsub}\n`;
 
   return {
     subject: `今日の呼びかけ　${day}日目`,

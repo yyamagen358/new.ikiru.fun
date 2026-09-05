@@ -61,13 +61,16 @@ export async function GET(req: Request) {
   const range = `created_at=gte.${from}&created_at=lt.${to}`;
 
   type Diag = { soul_number: number; source: string };
+  type Visit = { source: string };
   type Ans = { day: number; source: string; email: string };
 
-  const [diagY, diagAll, ansY, ansAll] = await Promise.all([
+  const [diagY, diagAll, ansY, ansAll, visitY] = await Promise.all([
     sb(`soulmission_diagnoses?select=soul_number,source&${range}`) as Promise<Diag[] | null>,
     sb(`soulmission_diagnoses?select=soul_number`) as Promise<Diag[] | null>,
     sb(`yobikake_answers?select=day,source,email&${range}`) as Promise<Ans[] | null>,
     sb(`yobikake_answers?select=email`) as Promise<Ans[] | null>,
+    // 到達。診断完了と対にして初めて「どれだけ離脱したか」が分かる
+    sb(`soulmission_visits?select=source&${range}`) as Promise<Visit[] | null>,
   ]);
 
   if (!diagY || !diagAll) {
@@ -77,6 +80,9 @@ export async function GET(req: Request) {
   const dateLabel = new Date(new Date(from).getTime() + JST).toISOString().slice(0, 10);
   const byNumber = tally(diagY, (r) => r.soul_number);
   const bySource = tally(diagY, (r) => r.source);
+  // 到達が取れていない日もあるので、0件のときは率を出さずに「—」にする
+  const visits = visitY?.length ?? 0;
+  const rate = visits > 0 ? `${Math.round((diagY.length / visits) * 100)}%` : "—";
 
   const line = (label: string, value: string | number) =>
     `<tr><td style="padding:6px 16px 6px 0;color:#8a8a8a;font-size:13px">${esc(label)}</td>` +
@@ -98,7 +104,9 @@ export async function GET(req: Request) {
     `<p style="color:#8a8a8a;font-size:13px;letter-spacing:.1em">${dateLabel} の記録</p>` +
     `<h1 style="font-size:20px;margin:10px 0 22px">使命トリセツ 無料診断</h1>` +
     `<table style="border-collapse:collapse">` +
+    line("昨日の到達数", `${visits} 人`) +
     line("昨日の診断数", `${diagY.length} 件`) +
+    line("到達→診断の通過率", rate) +
     line("累計", `${diagAll.length} 件`) +
     `</table>` +
     `<p style="font-size:13px;color:#8a8a8a;margin:22px 0 6px">ソウルナンバー別（昨日）</p>` +
