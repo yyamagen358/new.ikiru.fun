@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import { RESEND, FROM, SITE, headers as authHeaders, esc, QUESTIONS } from "@/lib/yobikake-mail";
+import { saveAnswers } from "@/lib/yobikake-db";
 
 /**
  * 天空の呼びかけ — その日の答えを書き残す
  *
- * いまは答えをサーバーに保存せず、本人の受信箱に送り返すだけ。
- * 受信箱がその人の記録になる。こちら側からは読めない。
- *
- * before/after の証（§07）を作る段になったら Supabase に保存する。
- * それまでに書かれた言葉は後から取り出せない点に注意。
+ * 答えは2か所に残す。
+ *   1. Supabase — before/after の証を作るために後から取り出せるようにする
+ *   2. 本人の受信箱 — 書いたものを本人に返す（保存が失敗しても必ず送る）
  *
  * 宛先は contactId から Resend に問い合わせて解決する。
  * リクエストのメールアドレスを信用すると、第三者に送りつけられてしまう。
@@ -56,6 +55,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "リンクが正しくありません。" }, { status: 400 });
   }
 
+  // 先に保存する。保存に失敗しても本人へのメールは止めない
+  // （書いた言葉が本人に返らないほうが害が大きい）。
+  const saved = await saveAnswers([
+    {
+      contact_id: contactId,
+      email,
+      day,
+      question_id: question.id,
+      question: question.q,
+      answer,
+      source: "daily",
+    },
+  ]);
+
   const html =
     `<div style="font-family:sans-serif;line-height:1.95;color:#1a1a1a;max-width:520px">` +
     `<p style="color:#8a8a8a;font-size:13px;letter-spacing:.1em">${day}日目のあなたの答え</p>` +
@@ -63,13 +76,13 @@ export async function POST(req: Request) {
     `<p style="font-size:19px;font-weight:bold;margin:0 0 26px">${esc(answer)}</p>` +
     `<hr style="border:0;border-top:1px solid #e5e5e5;margin:0 0 20px">` +
     `<p style="font-size:14px;color:#555">このメールは消さずに残しておいてください。` +
-    `1年後、同じ問いが届いたときに読み返せます。</p>` +
+    `いつか読み返したとき、そのときのあなたが分かります。</p>` +
     `<p style="font-size:12px;color:#9a9a9a;margin-top:26px">AI Nation — ${SITE}</p></div>`;
 
   const text =
     `${day}日目のあなたの答え\n\n${question.q}\n→ ${answer}\n\n---\n` +
     `このメールは消さずに残しておいてください。\n` +
-    `1年後、同じ問いが届いたときに読み返せます。\n\nAI Nation — ${SITE}\n`;
+    `いつか読み返したとき、そのときのあなたが分かります。\n\nAI Nation — ${SITE}\n`;
 
   const r = await fetch(`${RESEND}/emails`, {
     method: "POST",
@@ -86,5 +99,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "送信できませんでした。" }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, saved: saved.saved });
 }

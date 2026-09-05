@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
+import { saveAnswers } from "@/lib/yobikake-db";
 
 /**
  * 天空の呼びかけ — メール登録
  *
- * v1 でやること（実装済みの範囲だけ約束する）:
+ * やること:
  *   1. Resend の Audience に連絡先を追加する（配信リストの実体）
- *   2. その場で「いま書いた3つ」を本人にメールで返す
- *      → 回答がブラウザから消えても、本人の受信箱に残る
- *
- * 日次配信そのものは未実装。ここでは「毎朝届く」と約束しない。
+ *   2. LPで書いた3つを Supabase に day=0 で保存する（before/after の起点）
+ *   3. その場で「いま書いた3つ」を本人にメールで返す
  *
  * 送信元について:
  *   この Resend アカウントで認証済みなのは yyamagen358.com のみ（2026-09-04 時点）。
@@ -81,7 +80,23 @@ export async function POST(req: Request) {
         }
     }
 
-    // 2) 本人に「いま書いた3つ」を返す
+    // 2) LPで書いた3つを保存する。day=0 が before/after の起点になる。
+    //    contactId が取れないと後で紐づけられないので、その場合は保存しない。
+    if (contactId && list.length) {
+        await saveAnswers(
+            list.map((x) => ({
+                contact_id: contactId as string,
+                email,
+                day: 0,
+                question_id: "lp",
+                question: x.q,
+                answer: x.a,
+                source: "lp" as const,
+            })),
+        );
+    }
+
+    // 3) 本人に「いま書いた3つ」を返す
     const rows = list
         .map(
             (x) =>

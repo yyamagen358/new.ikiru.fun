@@ -113,9 +113,9 @@ export default function YobikakeClient({ qid }: { qid: string }) {
             <Shell>
                 <p className="text-sm tracking-widest text-neutral-400">3つ、答えました</p>
                 <h2 className="mt-4 text-[28px] font-bold leading-[1.5] text-neutral-900">
-                    これを365日つづけたら、
+                    明日のあなたは、
                     <br />
-                    何が起きると思いますか。
+                    何と答えるでしょう。
                 </h2>
                 {/* 日次配信エンジンは未実装。動き出すまで「届きます」と断定しない */}
                 <p className="mt-8 text-[17px] leading-[1.95] text-neutral-700">
@@ -168,7 +168,7 @@ export default function YobikakeClient({ qid }: { qid: string }) {
                         commit({
                             q: q3text,
                             a: text.trim(),
-                            reply: "その一行が、今日のあなたです。1年後に同じ問いが届いたとき、あなたは何と書くでしょう。",
+                            reply: "その一行が、今日のあなたです。同じ問いに、あなたはいつも同じ答えを書くとは限りません。",
                         })
                     }
                     className="mt-8 w-full rounded-full bg-neutral-900 py-4 text-[17px] font-bold text-white transition enabled:hover:bg-neutral-700 disabled:bg-neutral-300"
