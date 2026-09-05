@@ -18,7 +18,12 @@ export type Q = {
 export const QUESTIONS = data.questions as Q[];
 export const RESEND = "https://api.resend.com";
 export const FROM = process.env.RESEND_FROM ?? "AI Nation <noreply@yyamagen358.com>";
-export const SITE = "https://new.ikiru.fun";
+/**
+ * メール内リンクの宛先。既定は本番。
+ * 動作確認のときだけ .env.local で YOBIKAKE_SITE=http://localhost:3000 を指定する。
+ * 本番側では絶対に設定しないこと（顧客のメールが localhost を指してしまう）。
+ */
+export const SITE = process.env.YOBIKAKE_SITE ?? "https://new.ikiru.fun";
 
 export function headers(key: string) {
   return { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
