@@ -77,12 +77,12 @@ export async function POST(req: Request) {
     `<hr style="border:0;border-top:1px solid #e5e5e5;margin:0 0 20px">` +
     `<p style="font-size:14px;color:#555">このメールは消さずに残しておいてください。` +
     `いつか読み返したとき、そのときのあなたが分かります。</p>` +
-    `<p style="font-size:12px;color:#9a9a9a;margin-top:26px">AI Nation — ${SITE}</p></div>`;
+    `<p style="font-size:12px;color:#9a9a9a;margin-top:26px">その一行 — ${SITE}</p></div>`;
 
   const text =
     `${day}日目のあなたの答え\n\n${question.q}\n→ ${answer}\n\n---\n` +
     `このメールは消さずに残しておいてください。\n` +
-    `いつか読み返したとき、そのときのあなたが分かります。\n\nAI Nation — ${SITE}\n`;
+    `いつか読み返したとき、そのときのあなたが分かります。\n\nその一行 — ${SITE}\n`;
 
   const r = await fetch(`${RESEND}/emails`, {
     method: "POST",

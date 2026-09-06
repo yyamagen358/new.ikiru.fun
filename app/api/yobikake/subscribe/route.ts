@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { saveAnswers } from "@/lib/yobikake-db";
+import { saveAnswers, logFunnel } from "@/lib/yobikake-db";
 
 /**
  * 天空の呼びかけ — メール登録
@@ -18,7 +18,7 @@ import { saveAnswers } from "@/lib/yobikake-db";
 
 type Answer = { q: string; a: string };
 
-const FROM = process.env.RESEND_FROM ?? "AI Nation <noreply@yyamagen358.com>";
+const FROM = process.env.RESEND_FROM ?? "その一行 <noreply@yyamagen358.com>";
 const REPLY_TO = process.env.RESEND_REPLY_TO ?? "noreply@yyamagen358.com";
 const UNSUB = (contactId: string) =>
     `https://new.ikiru.fun/api/yobikake/unsubscribe?c=${encodeURIComponent(contactId)}`;
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         );
     }
 
-    let body: { email?: unknown; answers?: unknown };
+    let body: { email?: unknown; answers?: unknown; q?: unknown; source?: unknown };
     try {
         body = await req.json();
     } catch {
@@ -113,7 +113,7 @@ export async function POST(req: Request) {
         `<hr style="border:0;border-top:1px solid #e5e5e5;margin:28px 0">` +
         `<p style="font-size:14px;color:#555">この3つが、あなたの出発点です。` +
         `毎朝の問いをお届けする準備が整いましたら、あらためてご連絡します。</p>` +
-        `<p style="font-size:12px;color:#9a9a9a;margin-top:24px">AI Nation — new.ikiru.fun</p>` +
+        `<p style="font-size:12px;color:#9a9a9a;margin-top:24px">その一行 — new.ikiru.fun</p>` +
         `</div>`;
 
     // 迷惑メール対策: text 版を併記する（HTMLのみは強くスパム判定される）。
@@ -124,7 +124,7 @@ export async function POST(req: Request) {
         list.map((x) => `${x.q}\n→ ${x.a}\n`).join("\n") +
         `\n---\nこの3つが、あなたの出発点です。\n` +
         `毎朝の問いをお届けする準備が整いましたら、あらためてご連絡します。\n\n` +
-        `AI Nation — https://new.ikiru.fun\n`;
+        `その一行 — https://new.ikiru.fun\n`;
 
     const res = await fetch(`${RESEND}/emails`, {
         method: "POST",
@@ -154,6 +154,14 @@ export async function POST(req: Request) {
             { status: 502 },
         );
     }
+
+    // 登録できた人だけを数える。どの動画から来たかが分かる唯一の地点。
+    // 画面から偽装されないよう、ここ（サーバー）で記録する。
+    await logFunnel({
+        stage: "signup",
+        question_id: typeof body.q === "string" ? body.q : null,
+        source: typeof body.source === "string" ? body.source : null,
+    });
 
     return NextResponse.json({ ok: true });
 }

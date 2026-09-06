@@ -17,7 +17,7 @@ export type Q = {
 
 export const QUESTIONS = data.questions as Q[];
 export const RESEND = "https://api.resend.com";
-export const FROM = process.env.RESEND_FROM ?? "AI Nation <noreply@yyamagen358.com>";
+export const FROM = process.env.RESEND_FROM ?? "その一行 <noreply@yyamagen358.com>";
 /**
  * メール内リンクの宛先。既定は本番。
  * 動作確認のときだけ .env.local で YOBIKAKE_SITE=http://localhost:3000 を指定する。
@@ -146,7 +146,7 @@ export function dailyMail(q: Q, day: number, contactId: string) {
     `<p style="font-size:14px;color:#777">書かなかった日があっても、問いは止まりません。</p>` +
     (day === GIFT_DAY ? giftHtml(contactId) : "") +
     `<hr style="border:0;border-top:1px solid #e5e5e5;margin:28px 0">` +
-    `<p style="font-size:12px;color:#9a9a9a">AI Nation — ${SITE}<br>` +
+    `<p style="font-size:12px;color:#9a9a9a">その一行 — ${SITE}<br>` +
     `<a href="${unsub}" style="color:#9a9a9a">配信を止める</a></p>` +
     `</div>`;
 
@@ -157,7 +157,7 @@ export function dailyMail(q: Q, day: number, contactId: string) {
     `${answerUrl(q.id, day, contactId)}\n\n` +
     `書かなかった日があっても、問いは止まりません。\n` +
     (day === GIFT_DAY ? giftText(contactId) : "") +
-    `\nAI Nation — ${SITE}\n配信を止める: ${unsub}\n`;
+    `\nその一行 — ${SITE}\n配信を止める: ${unsub}\n`;
 
   return {
     subject: `今日の呼びかけ　${day}日目`,

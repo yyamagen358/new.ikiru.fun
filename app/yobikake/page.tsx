@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import YobikakeClient from "./yobikake-client";
 
-const title = "今日の呼びかけ";
+// サービス名。毎朝届くもの（今日の呼びかけ）を含む器の名前。
+// レイアウトのテンプレートで「その一行 | AI Nation」になる。
+const title = "その一行";
 const description =
   "問いに3つ答えるだけ。あなたの内側にある答えを、あなた自身が見つけるための場所です。";
 

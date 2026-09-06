@@ -10,6 +10,7 @@
 
 const TABLE = "yobikake_answers";
 const NUMBERS_TABLE = "yobikake_numbers";
+const FUNNEL_TABLE = "yobikake_funnel";
 
 export type AnswerRow = {
   contact_id: string;
@@ -105,6 +106,47 @@ export async function saveNumber(row: {
           ...row,
           is_master: row.soul_number > 9,
           updated_at: new Date().toISOString(),
+        },
+      ]),
+    });
+    if (!res.ok) return { saved: false, reason: `http-${res.status}` };
+    return { saved: true };
+  } catch {
+    return { saved: false, reason: "network" };
+  }
+}
+
+export type FunnelStage = "visit" | "wrote" | "signup";
+
+/**
+ * LPの通過を記録する。
+ *
+ * 動画→LP→登録のどこで人が消えているかは、これが無いと一切分からない。
+ * 記録に失敗しても本人の体験は止めないので、呼び出し側で待たなくてよい。
+ */
+export async function logFunnel(row: {
+  stage: FunnelStage;
+  question_id?: string | null;
+  source?: string | null;
+  referrer?: string | null;
+}): Promise<{ saved: boolean; reason?: string }> {
+  const c = config();
+  if (!c) return { saved: false, reason: "not-configured" };
+  try {
+    const res = await fetch(`${c.url}/rest/v1/${FUNNEL_TABLE}`, {
+      method: "POST",
+      headers: {
+        apikey: c.key,
+        Authorization: `Bearer ${c.key}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify([
+        {
+          stage: row.stage,
+          question_id: (row.question_id ?? "").slice(0, 40) || null,
+          source: (row.source ?? "direct").slice(0, 40) || "direct",
+          referrer: (row.referrer ?? "").slice(0, 300) || null,
         },
       ]),
     });

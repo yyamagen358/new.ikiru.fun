@@ -19,7 +19,7 @@ function page(title: string, body: string, status = 200) {
     `line-height:1.95;color:#1a1a1a">` +
     `<h1 style="font-size:20px;margin:0 0 16px">${title}</h1>` +
     `<p style="font-size:15px;color:#555;margin:0">${body}</p>` +
-    `<p style="font-size:12px;color:#9a9a9a;margin-top:32px">AI Nation</p></div>`;
+    `<p style="font-size:12px;color:#9a9a9a;margin-top:32px">その一行</p></div>`;
   return new Response(html, {
     status,
     headers: { "Content-Type": "text/html; charset=utf-8" },

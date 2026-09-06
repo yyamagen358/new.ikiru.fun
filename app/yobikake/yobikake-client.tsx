@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import data from "@/lib/yobikake-questions.json";
 
 type Option = { n: string; name: string; reply: string };
@@ -15,6 +15,16 @@ type Q = {
 
 const QUESTIONS = data.questions as Q[];
 const Q2_POOL = data.q2_pool as string[];
+/**
+ * 2問目に使う選択式の問い。
+ *
+ * 動画で「①か②」まで決めた人が着地したとき、最初にやることがタップなら
+ * 指はもう動いている。そこに空欄が3つ並ぶと「書く」という別の行為に
+ * 切り替わって止まる。タップ→タップ→書く、と坂にする。
+ *
+ * q2_pool は自由記述しか入っていないので、選択式が1問も無いときだけ使う。
+ */
+const STANCE_IDS = QUESTIONS.filter((q) => q.mode === "stance").map((q) => q.id);
 const Q3_POOL = data.q3_pool as string[];
 
 const byId = new Map(QUESTIONS.map((q) => [q.id, q]));
@@ -38,9 +48,40 @@ type Answer = { q: string; a: string; reply?: string };
  * 配信4〜6日目のメール内で誘う。
  */
 
+
+/**
+ * LPの通過を記録する。
+ *
+ * 動画→LP→登録のどこで人が消えているかを見るため。
+ * 個人は送らない（段階・問い・流入元だけ）。
+ * 計測が落ちても画面は止めないので await しない。
+ */
+function track(stage: "visit" | "wrote", q: string) {
+    try {
+        const p = new URLSearchParams(window.location.search);
+        void fetch("/api/yobikake/track", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            keepalive: true,
+            body: JSON.stringify({
+                stage,
+                q,
+                source: p.get("utm_source") || p.get("from") || "direct",
+                referrer: document.referrer || null,
+            }),
+        }).catch(() => {});
+    } catch {
+        /* 計測できないだけ。進行は妨げない */
+    }
+}
+
 export default function YobikakeClient({ qid }: { qid: string }) {
     const q1 = useMemo(() => byId.get(qid) ?? QUESTIONS[0], [qid]);
-    const q2 = useMemo(() => byId.get(pick(Q2_POOL, q1.id, 7))!, [q1]);
+    const q2 = useMemo(() => {
+        // 1問目と同じ問いが続けて出ないように除く
+        const pool = STANCE_IDS.filter((id) => id !== q1.id);
+        return byId.get(pick(pool.length ? pool : Q2_POOL, q1.id, 7))!;
+    }, [q1]);
     const q3text = useMemo(() => pick(Q3_POOL, q1.id, 13), [q1]);
 
     const [step, setStep] = useState(0);           // 0,1,2 = 設問 / 3 = 完了
@@ -49,6 +90,24 @@ export default function YobikakeClient({ qid }: { qid: string }) {
     const [text, setText] = useState("");
 
     const current = step === 0 ? q1 : q2;
+
+    // 到達を1回だけ記録する。StrictMode の二重実行を防ぐ
+    const seen = useRef(false);
+    useEffect(() => {
+        if (seen.current) return;
+        seen.current = true;
+        track("visit", q1.id);
+    }, [q1.id]);
+
+    // 3問書き終えてメール入力の画面に着いたところ。
+    // ここと visit の差が「書いてもらえたか」、
+    // ここと signup の差が「メールを渡してもらえたか」になる。
+    const wrote = useRef(false);
+    useEffect(() => {
+        if (step !== 3 || wrote.current) return;
+        wrote.current = true;
+        track("wrote", q1.id);
+    }, [step, q1.id]);
 
     function commit(a: Answer) {
         const next = [...answers, a];
@@ -141,7 +200,7 @@ export default function YobikakeClient({ qid }: { qid: string }) {
                     </p>
                 </div>
 
-                <Subscribe answers={answers} />
+                <Subscribe answers={answers} qid={q1.id} />
             </Shell>
         );
     }
@@ -249,7 +308,7 @@ export default function YobikakeClient({ qid }: { qid: string }) {
  * 約束するのは「いま書いた3つをメールで送る」ことだけ。
  * 日次配信は未実装なので「毎朝届く」とは書かない。
  */
-function Subscribe({ answers }: { answers: Answer[] }) {
+function Subscribe({ answers, qid }: { answers: Answer[]; qid: string }) {
     const [email, setEmail] = useState("");
     const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
     const [message, setMessage] = useState("");
@@ -260,7 +319,17 @@ function Subscribe({ answers }: { answers: Answer[] }) {
             const res = await fetch("/api/yobikake/subscribe", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email.trim(), answers }),
+                body: JSON.stringify({
+                    email: email.trim(),
+                    answers,
+                    // どの動画から来た人が登録したかを見るため。
+                    // signup の記録はサーバー側で行う（画面からは偽装できない）
+                    q: qid,
+                    source:
+                        new URLSearchParams(window.location.search).get("utm_source") ||
+                        new URLSearchParams(window.location.search).get("from") ||
+                        "direct",
+                }),
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok) {
