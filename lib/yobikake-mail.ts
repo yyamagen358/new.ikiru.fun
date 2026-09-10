@@ -96,9 +96,10 @@ function giftHtml(contactId: string) {
     `<p style="margin:0 0 18px;font-size:15px;line-height:1.9">` +
     `その一人がどんな人なのかを、生年月日の数字から見てみます。<br>` +
     `今日は、いつもと違う角度からの問いです。</p>` +
-    `<p style="margin:0 0 8px"><a href="${giftUrl(contactId)}" ` +
-    `style="display:inline-block;background:#1a1a1a;color:#fff;text-decoration:none;` +
-    `padding:13px 30px;border-radius:999px;font-size:15px;font-weight:bold">使命トリセツを見る</a></p>` +
+    // ボタンにしない。1通にボタンが2つあると Gmail がプロモーション扱いにしやすい。
+    // 毎朝の「答えを書き残す」がボタンなので、こちらは文字リンクにする。
+    `<p style="margin:0 0 8px;font-size:16px"><a href="${giftUrl(contactId)}" ` +
+    `style="color:#1a1a1a;font-weight:bold">使命トリセツを見る →</a></p>` +
     `<p style="margin:0;font-size:13px;color:#8a8a8a">登録なしで、1分ほどで見られます</p>` +
     `</div>`
   );
