@@ -81,6 +81,10 @@ export function giftUrl(contactId: string) {
  *
  * 売り込みにしない。7つ答えたという事実を返して、
  * 「今日はいつもと違う角度の問い」として渡す。
+ *
+ * 「無料」という語は使わない。外部ドメインへのリンクと組み合わさると
+ * Gmail が宣伝と判定しやすく、実際に 2026-09-11 の配信で
+ * 受信者2人のうち1人が受信箱に届かなかった（Resend 側は delivered）。
  */
 function giftHtml(contactId: string) {
   return (
@@ -95,7 +99,7 @@ function giftHtml(contactId: string) {
     `<p style="margin:0 0 8px"><a href="${giftUrl(contactId)}" ` +
     `style="display:inline-block;background:#1a1a1a;color:#fff;text-decoration:none;` +
     `padding:13px 30px;border-radius:999px;font-size:15px;font-weight:bold">使命トリセツを見る</a></p>` +
-    `<p style="margin:0;font-size:13px;color:#8a8a8a">無料・登録不要・約1分</p>` +
+    `<p style="margin:0;font-size:13px;color:#8a8a8a">登録なしで、1分ほどで見られます</p>` +
     `</div>`
   );
 }
@@ -111,7 +115,7 @@ function giftText(contactId: string) {
     "その一人がどんな人なのかを、生年月日の数字から見てみます。",
     "今日は、いつもと違う角度からの問いです。",
     giftUrl(contactId),
-    "無料・登録不要・約1分",
+    "登録なしで、1分ほどで見られます",
     "",
   ].join("\n");
 }
