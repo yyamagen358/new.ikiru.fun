@@ -73,7 +73,7 @@ const FRAME: Slot[] = [
   { time: "01:00", key: "mangavid",  label: "4コマ動画",            sub: "詩の4コマが、動きだす" },
   { time: "02:00", key: "rerunB",    label: "眠れない人へ",         sub: "在庫から、もう一度" },
   { time: "03:00", key: "mondoushEN", label: "Inner Dialogue Shorts", sub: "One question from Master Ryu" },
-  { time: "04:00", key: "silence4",  label: "静寂",                 sub: "何も出しません。今日の空だけが変わります", silence: true },
+  { time: "04:00", key: "tiktok",    label: "TikTok",               sub: "夜明け前に、1本だけ" },
 ];
 
 const KIND_MARK: Record<string, string> = { video: "▶", image: "◼", text: "✎" };
