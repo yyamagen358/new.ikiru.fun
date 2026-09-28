@@ -78,6 +78,25 @@ const FRAME: Slot[] = [
 
 const KIND_MARK: Record<string, string> = { video: "▶", image: "◼", text: "✎" };
 
+/**
+ * 番組表の下に置く、時刻に縛られない入口。
+ * 同じ「魂のテーマ」への、読む道と観る・聴く道。
+ */
+const FEATURES = [
+  {
+    href: "/soul-theme",
+    mark: "🕯",
+    label: "あなたの魂のテーマ探す特集",
+    sub: "80億の魂に、80億のテーマがある。ひとつずつ、置いていきます",
+  },
+  {
+    href: "/soul-theater",
+    mark: "🎬",
+    label: "魂のテーマ劇場特集",
+    sub: "その物語を、声で。朗読とあとがきを毎朝ひとつ",
+  },
+];
+
 function jstNow() {
   const d = new Date();
   return new Date(d.getTime() + (d.getTimezoneOffset() + 540) * 60000);
@@ -238,33 +257,37 @@ export function Broadcast() {
 
         {/*
           番組表は「今日どう流れるか」を見せる。そのすぐ下に、時刻に縛られない
-          入口をひとつだけ置く。番組表を上から下まで見た人が次にどこへ行くかを
+          入口を置く。番組表を上から下まで見た人が次にどこへ行くかを
           決められないまま離脱するのを防ぐための一手。
-          特集を増やすなら並べずに、いちばん強い1本だけをここに置くこと。
+          2本目は「読む」に対する「観る・聴く」で、1本目と同じ作品への別の入口。
+          役割が違うから並べる。役割の重なるものをここに足さないこと。
         */}
-        <div className="mt-8 pt-7 border-t border-portal-amber/20">
-          <a
-            href={`${CONTENT_ORIGIN}/soul-theme`}
-            className="group flex items-center gap-4 rounded-2xl bg-portal-cream/60 border border-portal-amber/25 px-5 py-4 transition-colors duration-200 hover:bg-portal-cream-deep/70 hover:border-portal-amber/50"
-          >
-            <span className="text-2xl leading-none" aria-hidden="true">
-              🕯
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block font-serif text-[1.05rem] font-bold text-portal-text-dark leading-snug">
-                あなたの魂のテーマ探す特集
-              </span>
-              <span className="block font-round text-[0.85rem] text-portal-text-soft mt-[3px]">
-                80億の魂に、80億のテーマがある。ひとつずつ、置いていきます
-              </span>
-            </span>
-            <span
-              className="font-round text-[0.85rem] font-bold text-portal-amber-deep shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]"
-              aria-hidden="true"
+        <div className="mt-8 pt-7 border-t border-portal-amber/20 flex flex-col gap-3">
+          {FEATURES.map((f) => (
+            <a
+              key={f.href}
+              href={`${CONTENT_ORIGIN}${f.href}`}
+              className="group flex items-center gap-4 rounded-2xl bg-portal-cream/60 border border-portal-amber/25 px-5 py-4 transition-colors duration-200 hover:bg-portal-cream-deep/70 hover:border-portal-amber/50"
             >
-              →
-            </span>
-          </a>
+              <span className="text-2xl leading-none" aria-hidden="true">
+                {f.mark}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-serif text-[1.05rem] font-bold text-portal-text-dark leading-snug">
+                  {f.label}
+                </span>
+                <span className="block font-round text-[0.85rem] text-portal-text-soft mt-[3px]">
+                  {f.sub}
+                </span>
+              </span>
+              <span
+                className="font-round text-[0.85rem] font-bold text-portal-amber-deep shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </a>
+          ))}
         </div>
       </div>
     </section>
