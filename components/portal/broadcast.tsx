@@ -80,7 +80,7 @@ const KIND_MARK: Record<string, string> = { video: "▶", image: "◼", text: "�
 
 /**
  * 番組表の下に置く、時刻に縛られない入口。
- * 同じ「魂のテーマ」への、読む道と観る・聴く道。
+ * 読む道（魂のテーマ）、観る・聴く道（劇場）、物語で聴く道（朗読ドラマ）。
  */
 const FEATURES = [
   {
@@ -94,6 +94,12 @@ const FEATURES = [
     mark: "🎬",
     label: "魂のテーマ劇場特集",
     sub: "その物語を、声で。朗読とあとがきを毎朝ひとつ",
+  },
+  {
+    href: "/celestial-drama",
+    mark: "🎧",
+    label: "天空の愛朗読ドラマ集",
+    sub: "ひとつのメッセージを、ひとつの物語に。声で受け取る",
   },
 ];
 
